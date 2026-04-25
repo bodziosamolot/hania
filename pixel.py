@@ -14,6 +14,10 @@ def narysuj_kwadrat(x,y):
 def wyswietl():
     pygame.display.flip()
 
+def wymarz():
+    screen.fill((0, 0, 0))
+    pygame.display.flip()
+
 # pygame.init() uruchamia wszystkie moduły pygame (dźwięk, ekran, czcionki itd.)
 # Trzeba to wywołać przed użyciem czegokolwiek z pygame
 pygame.init()
@@ -30,7 +34,7 @@ screen.fill((0, 0, 0))
 # To jest najniższy poziom rysowania — dosłownie jeden punkt na ekranie
 cx = WIDTH // 2
 cy = HEIGHT // 2
-screen.set_at((cx, cy), (255, 255, 255))
+# screen.set_at((cx, cy), (255, 255, 255))
 
 # flip() "przerzuca" to co narysowaliśmy na ekran
 # Pygame rysuje najpierw w pamięci (buforze), a flip() pokazuje wynik
@@ -46,11 +50,28 @@ y = cy
 
 # -----------------------------------------------------------------------
 
+idziemy_w_prawo = True
+
 while running:
     
     narysuj_kwadrat(x, y)
-    narysuj_piksel(x+100, y+100)
     wyswietl()
+    
+    if idziemy_w_prawo:
+        x = x + 1
+    else:
+        x = x - 1
+    
+    if x == 800-10:
+        idziemy_w_prawo = False
+    elif x == 0:
+        idziemy_w_prawo = True
+        
+    time.sleep(0.003)
+    wymarz()
+        
+    print(x+1)
+    
 
 # ----------------------------------------------------------------------
 
