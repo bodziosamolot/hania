@@ -9,7 +9,7 @@ def narysuj_piksel(x,y):
     screen.set_at((x, y), (255, 255, 255))
 
 def narysuj_kwadrat(x,y):
-    pygame.draw.rect(screen, (255, 255, 255), (x, y - 10, 20, 20))
+    pygame.draw.rect(screen, (255, 255, 255), (x, y - 10, 5, 5))
 
 def wyswietl():
     pygame.display.flip()
@@ -45,8 +45,8 @@ pygame.display.flip()
 # pygame.event.get() sprawdza co się dzieje (kliknięcia, klawisze, zamknięcie)
 # Bez tej pętli okno by się otworzyło i natychmiast zamknęło
 running = True
-x = cx
-y = cy
+x = -20
+y = 0
 
 # -----------------------------------------------------------------------
 
@@ -54,23 +54,25 @@ idziemy_w_prawo = True
 
 while running:
     
-    narysuj_kwadrat(x, y)
+    narysuj_kwadrat(x+cx+x*10, cy-y)
     wyswietl()
-    
     if idziemy_w_prawo:
         x = x + 1
     else:
         x = x - 1
+        
+    y = x * x
     
-    if x == 800-10:
+    if x == 19:
         idziemy_w_prawo = False
-    elif x == 0:
+    elif x == -19:
         idziemy_w_prawo = True
         
-    time.sleep(0.003)
+    # time.sleep(0.003)
+    time.sleep(0.1)
     wymarz()
         
-    print(x+1)
+    print(f'x: {x}, y:{y}')
     
 
 # ----------------------------------------------------------------------
