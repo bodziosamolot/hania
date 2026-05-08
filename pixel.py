@@ -2,6 +2,8 @@ import time
 
 import pygame
 
+import math
+
 WIDTH = 800
 HEIGHT = 600
 
@@ -51,28 +53,38 @@ y = 0
 # -----------------------------------------------------------------------
 
 idziemy_w_prawo = True
+kierunek = 1
+
+y = 0
+poprzedni_y = 0
 
 while running:
     
-    narysuj_kwadrat(x+cx+x*10, cy-y)
+    narysuj_kwadrat(x+cx, cy-y)
     wyswietl()
     if idziemy_w_prawo:
         x = x + 1
     else:
         x = x - 1
         
-    y = x * x
+    y = kierunek*x
+    diff = abs(y-poprzedni_y)
+    y = y + kierunek*diff
+   
     
-    if x == 19:
+    if x == 300:
         idziemy_w_prawo = False
-    elif x == -19:
+        kierunek = kierunek * (-1)
+    elif x == -300:
         idziemy_w_prawo = True
         
     # time.sleep(0.003)
-    time.sleep(0.1)
+    time.sleep(0.005)
     wymarz()
         
-    print(f'x: {x}, y:{y}')
+    print(f'x: {x}, y:{y}, poprzedni_y:{poprzedni_y}, diff:{diff}')
+
+    poprzedni_y = y
     
 
 # ----------------------------------------------------------------------
